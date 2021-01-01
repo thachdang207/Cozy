@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Cozy Coffee</title>
+    <title>Cozy Management</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -99,8 +99,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link bg-info">
-                <img src="{{ asset('AdminLTE/dist/img/AdminLTELogo.png')  }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <img src="https://scontent.fdad3-1.fna.fbcdn.net/v/t1.0-9/40018675_276206013108199_5139616706892660736_n.jpg?_nc_cat=106&ccb=2&_nc_sid=09cbfe&_nc_ohc=Gd29B_rfb5cAX_F_T3b&_nc_ht=scontent.fdad3-1.fna&oh=f0e97696f2b715ef134eafb564281ed5&oe=60148E16" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Cozy Management</span>
             </a>
 
             <!-- Sidebar -->
