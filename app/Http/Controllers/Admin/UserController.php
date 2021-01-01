@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\Criterion;
 use App\models\Department;
+use App\models\Role;
 use yajra\Datatables\Datatables;
 
 class UserController extends Controller
@@ -48,6 +49,7 @@ class UserController extends Controller
     }
     public function getDataFromForm($request)
     {
+        $roleStaff = Role::where('name', '=', 'staff')->get();
         $data['name'] = $request->name;
         $data['full_address'] = $request->full_address;
         $data['email'] = $request->email;
@@ -56,7 +58,7 @@ class UserController extends Controller
         $data['birthday'] = $request->birthday;
         $data['phone_number'] = $request->phone_number;
         $data['department_id'] = $request->department_id;
-        $data['role_id'] = 2;
+        $data['role_id'] = $roleStaff[0]->id;
         return $data;
     }
     /**
