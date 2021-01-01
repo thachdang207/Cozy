@@ -1,5 +1,7 @@
 <?php
 
+use App\models\Department;
+use App\models\Role;
 use App\models\User;
 use Illuminate\Database\Seeder;
 
@@ -42,6 +44,10 @@ class UsersTableSeeder extends Seeder
         //         ]
         //     );
         // }
+        $roleAdmin = Role::where('name', '=', 'admin')->get();
+        $roleStaff = Role::where('name', '=', 'staff')->get();
+        $depHR = Department::where('name', '=', 'Human Resource')->get();
+        $depIT = Department::where('name', '=', 'IT')->get();
         $data = array(
             'name' => 'Đặng Hữu Thạch',
             'full_address' => 'Quảng nam',
@@ -50,8 +56,8 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'phone_number' => '0783297616',
             'password' => bcrypt('123123123'),
-            'role_id' => 1,
-            'department_id' => 1
+            'role_id' => $roleAdmin[0]->id,
+            'department_id' => $depIT[0]->id
         );
         User::insert(
             $data
@@ -66,8 +72,8 @@ class UsersTableSeeder extends Seeder
                     'email' => 'user' . $i . '@gmail.com',
                     'phone_number' => '07812345' . $i,
                     'password' => bcrypt('123123123'),
-                    'role_id' => 2,
-                    'department_id' => 2
+                    'role_id' => $roleStaff[0]->id,
+                    'department_id' => $depHR[0]->id
                 ]
             );
         }
