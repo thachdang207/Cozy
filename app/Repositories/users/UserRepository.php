@@ -16,7 +16,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
     public function getAll()
     {
-        return User::where('role_id', '<>', 1);
+        $roleId = Role::where('name', 'LIKE', '%admin%')->get();
+        return User::where('role_id', '<>', $roleId[0]->id);
     }
     public function getAllDepartments()
     {
@@ -41,7 +42,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function getData($fieldTable, $valueSearch)
     {
         // dd($fieldTable);
-        $roleId = Role::where('name', 'LIKE', '%admin%');
+        $roleId = Role::where('name', 'LIKE', '%admin%')->get();
         return User::where($fieldTable, 'LIKE', '%' . $valueSearch . '%')->where('role_id', '<>', $roleId[0]->id);
     }
 }
