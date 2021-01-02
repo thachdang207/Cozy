@@ -38,8 +38,8 @@ Route::middleware(['checkRole:admin'])->group(function () {
     Route::get('roles', 'Admin\RoleController@index');
 });
 Route::middleware(['checkRole:admin,staff'])->group(function () {
-    Route::get('/report/data-table', 'User\HistoricalCriterionController@anyData')->name('historical-criteria.data');
-    Route::get('/report', 'User\HistoricalCriterionController@index')->name('historical-criteria.report');
+    Route::get('/report/data-table', 'Admin\ReportController@anyData')->name('historical-criteria.data');
+    Route::get('/report', 'Admin\ReportController@index')->name('historical-criteria.report');
 });
 Auth::routes();
 Route::get('/logout', function () {

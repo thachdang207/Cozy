@@ -31,22 +31,23 @@ class HistoricalCriterionRepository extends BaseRepository implements Historical
     {
         $month = date('m', strtotime($time));
         $year = date('Y', strtotime($time));
-        // return DB::table('historical_criteria')->select('users.name as name', DB::raw('DATE_FORMAT(historical_criteria.date, "%Y-%m") as date'), DB::raw('sum(criteria.point) as point'))
-        //     ->rightJoin('users', 'users.id', '=', 'historical_criteria.user_id')
-        //     ->join('criteria', 'criteria.id', '=', 'historical_criteria.criterion_id')
-        //     ->whereYear('date', '=', $year)->whereMonth('date', '=', $month)
-        //     ->groupBy(DB::raw('YEAR(date)'), DB::raw('MONTH(date)'))
-        //     ->groupBy('user_id')->having($fieldTable, 'LIKE', '%' . $valueSearch . '%')
-        //     ->get();
         return DB::table('users')
-            ->select('users.name as name', 'history.*')
+            ->select('users.name as name', 'users.id', 'history.*', 'time_keeping.timeKeeping')
             ->leftJoin(
                 DB::raw('(SELECT DATE_FORMAT(historical_criteria.date, "%Y-%m") as date,sum(criteria.point) as point,historical_criteria.user_id FROM historical_criteria inner join criteria on historical_criteria.criterion_id=criteria.id where year(date)=' . $year . ' and month(date)=' . $month . '  GROUP BY historical_criteria.user_id)
                as history'),
                 'users.id',
                 '=',
                 'history.user_id'
-            )->where($fieldTable, 'LIKE', '%' . $valueSearch . '%')
+            )
+            ->leftJoin(
+                DB::raw('(SELECT  DATE_FORMAT(historical_criteria.date, "%Y-%m") as date,sum(criteria.point) as timeKeeping,historical_criteria.user_id FROM historical_criteria inner join criteria on historical_criteria.criterion_id=criteria.id where year(date)=' . $year . ' and month(date)=' . $month . ' and criteria.name LIKE "%Chấm công%"  GROUP BY historical_criteria.user_id)
+               as time_keeping'),
+                'users.id',
+                '=',
+                'time_keeping.user_id'
+            )
+            ->where($fieldTable, 'LIKE', '%' . $valueSearch . '%')
             ->get();
     }
     public function store($attribute = [])
