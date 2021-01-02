@@ -3,6 +3,7 @@
 namespace App\Repositories\users;
 
 use App\models\Department;
+use App\models\Role;
 use App\models\User;
 use App\Repositories\BaseRepository;
 
@@ -40,6 +41,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function getData($fieldTable, $valueSearch)
     {
         // dd($fieldTable);
-        return User::where($fieldTable, 'LIKE', '%' . $valueSearch . '%')->where('role_id', '<>', 1);
+        $roleId = Role::where('name', 'LIKE', '%admin%');
+        return User::where($fieldTable, 'LIKE', '%' . $valueSearch . '%')->where('role_id', '<>', $roleId[0]->id);
     }
 }
