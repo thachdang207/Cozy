@@ -32,7 +32,7 @@ class CriterionController extends Controller
      */
     public function create()
     {
-        return view('Admin.criteria.create');
+        return view('Admin.Criteria.create');
     }
 
     /**
