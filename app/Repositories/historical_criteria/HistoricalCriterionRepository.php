@@ -4,6 +4,7 @@ namespace App\Repositories\historical_criteria;
 
 use App\models\Criterion;
 use App\models\HistoricalCriterion;
+use App\models\Role;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
 
@@ -31,6 +32,7 @@ class HistoricalCriterionRepository extends BaseRepository implements Historical
     {
         $month = date('m', strtotime($time));
         $year = date('Y', strtotime($time));
+        $roleId = Role::where('name', 'LIKE', '%admin%')->get();
         return DB::table('users')
             ->select('users.name as name', 'users.id', 'history.*', 'time_keeping.timeKeeping')
             ->leftJoin(
@@ -47,7 +49,7 @@ class HistoricalCriterionRepository extends BaseRepository implements Historical
                 '=',
                 'time_keeping.user_id'
             )
-            ->where($fieldTable, 'LIKE', '%' . $valueSearch . '%')
+            ->where($fieldTable, 'LIKE', '%' . $valueSearch . '%')->where('users.role_id', '<>', $roleId[0]->id)
             ->get();
     }
     public function store($attribute = [])
