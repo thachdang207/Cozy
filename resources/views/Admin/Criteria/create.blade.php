@@ -3,7 +3,7 @@
 @section('title','6.2')
 @section('content')
 <div class="row">
-    <div class="col-6 offset-3">
+    <div class="col-6 offset-3 ">
         <form action="{{ route('criteria.store')}}" method="POST">
             @csrf
             <div class="form-group">
