@@ -14,7 +14,6 @@ const ajax = (url, type, data, todo) => {
             todo(data);
         },
         error: function(data) {
-            console.log(data);
             toastr.options = {
                 closeButton: false,
                 debug: false,
@@ -40,7 +39,6 @@ const ajax = (url, type, data, todo) => {
 const createCriteria = data => {
     if ($.isEmptyObject(data.error)) {
         checkbox = [];
-        console.log(checkbox);
         $("#criteriaModal").modal("hide");
         $("#users-table")
             .DataTable()
@@ -213,7 +211,6 @@ const deleteUser = data => {
     }
 };
 const tickCriteriaForUser = data => {
-    console.log(data.data);
     let ticks = data.data;
     $(".checkbox").prop("checked", false);
     ticks.map(tick => {
@@ -373,7 +370,7 @@ $(function() {
             .text();
         $("#setName").html("<b>Name:</b> " + name);
         // $("#id").val(id);
-        $('input[name="id"]').val(id);
+        $('input[name="id"]').val(user_id);
         var now = new Date();
 
         var day = ("0" + now.getDate()).slice(-2);
@@ -416,7 +413,6 @@ $(function() {
                 }
             });
         }
-        console.log(checkbox);
     });
     $(document).on("click", "#createCriteria", async function(e) {
         e.preventDefault();
@@ -428,7 +424,6 @@ $(function() {
         );
         checkbox = [];
         $(".checkbox").prop("checked", false);
-        console.log(checkbox);
     });
     $(document).on("click", "#update", function(e) {
         var _method = $("input[name=_method]").val();
