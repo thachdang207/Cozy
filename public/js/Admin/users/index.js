@@ -413,8 +413,10 @@ $(function() {
                 }
             });
         }
+        console.log(checkbox);
     });
-    $(document).on("click", "#createCriteria", async function(e) {
+    $(document).on("click", "#createCriteria", function(e) {
+        console.log(JSON.stringify(checkbox));
         e.preventDefault();
         ajax(
             "/historical-criteria",
