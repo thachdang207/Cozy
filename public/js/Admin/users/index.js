@@ -212,6 +212,14 @@ const deleteUser = data => {
         clearError();
     }
 };
+const tickCriteriaForUser = data => {
+    console.log(data.data);
+    let ticks = data.data;
+    $(".checkbox").prop("checked", false);
+    ticks.map(tick => {
+        $("#check" + tick).prop("checked", true);
+    });
+};
 $(function() {
     var checkbox = new Array();
     var listCriteria, user_id, date, criterion_id;
@@ -306,7 +314,8 @@ $(function() {
         searching: false,
         bLengthChange: false, //thought this line could hide the LengthMenu
         //"bInfo":false,
-        pageLength: 5
+        pageLength: 5,
+        responsive: true
         //bDestroy:true,
     });
     $("#valueSearch").keypress(function(event) {
@@ -357,7 +366,7 @@ $(function() {
         });
     });
     $("#users-table").on("click", ".criteria", function(e) {
-        var id = $(this).val();
+        user_id = $(this).val();
         var name = $(this)
             .closest("tr")
             .find(".name")
@@ -372,6 +381,12 @@ $(function() {
 
         var today = now.getFullYear() + "-" + month + "-" + day;
         $("#date_criteria").val(today);
+        ajax(
+            `/historical-criteria/${user_id}/user?date=${today}`,
+            "GET",
+            "",
+            tickCriteriaForUser
+        );
     });
     $("#date_criteria").on("input change", function(e) {
         // $("#check1").prop("checked", true);
@@ -451,5 +466,14 @@ $(function() {
         var id = $(this).val();
         e.preventDefault();
         ajax("/users/" + id, "DELETE", {}, deleteUser);
+    });
+    $("#date_criteria").change(function() {
+        var date = $(this).val();
+        ajax(
+            `/historical-criteria/${user_id}/user?date=${date}`,
+            "GET",
+            "",
+            tickCriteriaForUser
+        );
     });
 });

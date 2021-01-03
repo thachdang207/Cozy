@@ -158,7 +158,7 @@
                         <input type="hidden" value="" name="id" id="id">
                         <div class="form-group">
                             <label for="date_criteria">Date</label>
-                            <input type="date" class="form-control" id="date_criteria" placeholder="Password">
+                            <input type="date" class="form-control" id="date_criteria">
                         </div>
                         @foreach($criteria as $criterion)
                         <div class="form-check">

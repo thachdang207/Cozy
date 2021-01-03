@@ -56,4 +56,9 @@ class HistoricalCriterionRepository extends BaseRepository implements Historical
     {
         HistoricalCriterion::insert($attribute);
     }
+    public function getTickForEachUser($id, $date)
+    {
+        // return HistoricalCriterion::select('criterion_id')->where('user_id', $id)->list('criterion_id')->toArray();
+        return HistoricalCriterion::where('user_id', $id)->where('date', '=', $date)->pluck('criterion_id')->toArray();
+    }
 }

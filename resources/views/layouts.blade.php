@@ -41,6 +41,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @yield('link')
     <link rel="icon" href="https://scontent.fdad3-1.fna.fbcdn.net/v/t1.0-9/40018675_276206013108199_5139616706892660736_n.jpg?_nc_cat=106&ccb=2&_nc_sid=09cbfe&_nc_ohc=Gd29B_rfb5cAX_F_T3b&_nc_ht=scontent.fdad3-1.fna&oh=f0e97696f2b715ef134eafb564281ed5&oe=60148E16" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="cdn.datatables.net/responsive/2.2.6/css/dataTables.responsive.css"> -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

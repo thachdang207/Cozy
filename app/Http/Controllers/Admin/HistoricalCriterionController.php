@@ -43,15 +43,11 @@ class HistoricalCriterionController extends Controller
      */
     public function store(Request $request)
     {
-        // $id = $request->id;
         $data = json_decode($request->checkbox);
-        // $date = $request->date;
         for ($i = 0; $i < count($data); $i++) {
             $data[$i] = (array) $data[$i];
         }
-        // dd($data);
         $this->historicalCriteriaRepo->store($data);
-        // HistoricalCriterion::insert($data);
         return response()->json([
             'data' => 'successfully created'
         ]);
@@ -101,18 +97,13 @@ class HistoricalCriterionController extends Controller
     {
         //
     }
+
     public function anyData()
     {
         $fieldTable = (!empty($_GET["fieldTable"])) ? ($_GET["fieldTable"]) : ('user_id');
         $valueSearch = (!empty($_GET["valueSearch"])) ? ($_GET["valueSearch"]) : ('');
         $month = (!empty($_GET["month"])) ? ($_GET["month"]) : ('');
         $historicalCriteria = $this->historicalCriteriaRepo->getData($fieldTable, $valueSearch, $month);
-        // dd($histories);
-        // if ($valueSearch && $fieldTable) {
-        //     $histories = $this->historicalCriteriaRepo->getData($fieldTable, $valueSearch, $month);
-        // } else {
-        //     $histories = $this->historicalCriteriaRepo->getAll();
-        // }
         return DataTables::of($historicalCriteria)
             ->editColumn('created_at', function ($historicalCriterion) {
                 return date('d/m/Y', strtotime($historicalCriterion->created_at));
@@ -139,5 +130,14 @@ class HistoricalCriterionController extends Controller
                 return $historicalCriterion->user->email;
             })
             ->make(true);
+    }
+
+    public function getTickForEachUser($id, Request $request)
+    {
+        $date = $request->date;
+        $listTick = $this->historicalCriteriaRepo->getTickForEachUser($id, $date);
+        return response()->json([
+            'data' => $listTick
+        ]);
     }
 }

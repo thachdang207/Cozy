@@ -23,10 +23,12 @@ Route::middleware(['checkRole:admin'])->group(function () {
         return "admin";
     });
 });
+
 Route::middleware(['checkRole:admin'])->group(function () {
     Route::get('/users/data-table', 'Admin\UserController@anyData')->name('users.data');
     Route::get('/criteria/data-table', 'Admin\CriterionController@anyData')->name('criteria.data');
     Route::get('/historical-criteria/data-table', 'Admin\HistoricalCriterionController@anyData')->name('historical-criteria.data');
+    Route::get('/historical-criteria/{id}/user', 'Admin\HistoricalCriterionController@getTickForEachUser')->name('getTickForEachUser');
     Route::put('users/update', 'Admin\UserController@update')->name('update');
     Route::group(['namespace' => 'Admin'], function () {
         Route::resources([
